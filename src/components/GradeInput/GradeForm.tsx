@@ -85,7 +85,11 @@ export const GradeForm: React.FC<GradeFormProps> = ({ onSubmit, subjects }) => {
             control={control}
             rules={{ required: 'Este campo es requerido' }}
             render={({ field }) => (
-              <IonInput {...field} placeholder="Ej: Prueba 1" />
+              <IonInput
+                {...field}
+                placeholder="Ej: Prueba 1"
+                onIonChange={(e) => field.onChange(e.detail.value ?? '')}
+              />
             )}
           />
           {errors.name && (
@@ -110,6 +114,7 @@ export const GradeForm: React.FC<GradeFormProps> = ({ onSubmit, subjects }) => {
                 min="1.0"
                 max="7.0"
                 step="0.1"
+                onIonChange={(e) => field.onChange(parseFloat(e.detail.value ?? '1.0'))}
               />
             )}
           />
@@ -136,6 +141,7 @@ export const GradeForm: React.FC<GradeFormProps> = ({ onSubmit, subjects }) => {
                 type="number"
                 min="0"
                 max={remainingPercentage}
+                onIonChange={(e) => field.onChange(parseFloat(e.detail.value ?? '0'))}
               />
             )}
           />
@@ -151,7 +157,11 @@ export const GradeForm: React.FC<GradeFormProps> = ({ onSubmit, subjects }) => {
             control={control}
             rules={{ required: 'Este campo es requerido' }}
             render={({ field }) => (
-              <IonInput {...field} type="date" />
+              <IonInput
+                {...field}
+                type="date"
+                onIonChange={(e) => field.onChange(e.detail.value ?? '')}
+              />
             )}
           />
           {errors.date && (
