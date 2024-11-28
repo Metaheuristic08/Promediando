@@ -9,6 +9,7 @@ interface GradeStore {
   updateGrade: (id: string, grade: Partial<Grade>) => boolean;
   deleteGrade: (id: string) => void;
   addSubject: (subject: string) => void;
+  deleteSubject: (subject: string) => void;
   calculateAverage: (subject?: string) => number;
   getSubjectStats: (subject: string) => GradeStats;
   exportData: () => string;
@@ -72,6 +73,13 @@ export const useGradeStore = create<GradeStore>()(
       addSubject: (subject) => {
         set((state) => ({
           subjects: [...new Set([...state.subjects, subject])],
+        }));
+      },
+
+      deleteSubject: (subject) => {
+        set((state) => ({
+          subjects: state.subjects.filter(s => s !== subject),
+          grades: state.grades.filter(g => g.subject !== subject),
         }));
       },
 
